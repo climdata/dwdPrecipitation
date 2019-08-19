@@ -1,0 +1,70 @@
+---
+title: "Dwd Precipitation"
+author: "Kmicha71"
+date: "19 8 2019"
+output:
+  html_document: 
+    keep_md: true
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## DWD Precipitation
+
+Download the precipitation data from dwd (monthly & regional summary)
+
+
+```{sh downloads}
+
+for month in "01" "02" "03" "04" "05" "06" "07" "08" "09" "10" "11" "12"
+do
+ file="regional_averages_rr_$month.txt"
+ echo "Download file: $file"
+ [ -f ./download/$file ] && mv -f ./download/$file ./download/$file.bck
+ wget -q -P download https://opendata.dwd.de/climate_environment/CDC/regional_averages_DE/monthly/precipitation/$file
+ ## Remove first line !!
+ tail -n +2 ./download/$file > ./download/$file.tmp && mv ./download/$file.tmp ./download/$file
+done
+```
+
+
+```{r convert}
+prec <- read.csv("./download/regional_averages_rr_01.txt", sep=";")
+
+for (month in c("02","03","04","05","06","07","08","09","10","11","12")){
+  file <- paste("./download/regional_averages_rr_", month, ".txt", sep="")
+  print(paste("Reading file:", file))
+  tmp <- read.csv(file, sep=";")
+  prec <- rbind(prec, tmp)
+}
+prec <- prec[order(prec$Jahr, prec$Monat),]
+names(prec)[names(prec) == "Jahr"] <- "year"
+names(prec)[names(prec) == "Monat"] <- "month"
+prec$time <- signif(prec$year + (prec$month-0.5)/12, digits=6)
+prec$X <- NULL
+
+write.table(prec, file = "csv/monthly_precipitation_de.csv", append = FALSE, quote = TRUE, sep = ",",
+            eol = "\n", na = "NA", dec = ".", row.names = FALSE,
+            col.names = TRUE, qmethod = "escape", fileEncoding = "UTF-8")
+```
+
+
+
+
+## Plot Precipitation
+
+```{r plot, echo=TRUE}
+require("ggplot2")
+prec <- read.csv("./csv/monthly_precipitation_de.csv", sep=",")
+mp <- ggplot() +
+      geom_line(aes(y=prec$Deutschland, x=prec$time), color="blue") +
+      xlab("Year") + ylab("Precipitation [mm]")
+mp
+```
+
+
+
+
