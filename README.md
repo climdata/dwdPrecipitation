@@ -75,7 +75,8 @@ for (month in c("02","03","04","05","06","07","08","09","10","11","12")){
 prec <- prec[order(prec$Jahr, prec$Monat),]
 names(prec)[names(prec) == "Jahr"] <- "year"
 names(prec)[names(prec) == "Monat"] <- "month"
-prec$time <- signif(prec$year + (prec$month-0.5)/12, digits=6)
+prec$ts <- signif(prec$year + (prec$month-0.5)/12, digits=6)
+prec$time <- paste(prec$year,prec$month, '15 00:00:00', sep='-')
 prec$X <- NULL
 
 write.table(prec, file = "csv/monthly_precipitation_de.csv", append = FALSE, quote = TRUE, sep = ",",
@@ -84,9 +85,7 @@ write.table(prec, file = "csv/monthly_precipitation_de.csv", append = FALSE, quo
 ```
 
 
-
-
-## Plot Precipitation
+## Plot Precipitation Data
 
 
 ```r
@@ -97,16 +96,15 @@ require("ggplot2")
 ## Loading required package: ggplot2
 ```
 
+```
+## Warning: package 'ggplot2' was built under R version 3.5.3
+```
+
 ```r
-prec <- read.csv("./csv/monthly_precipitation_de.csv", sep=",")
 mp <- ggplot() +
-      geom_line(aes(y=prec$Deutschland, x=prec$time), color="blue") +
+      geom_line(aes(y=prec$Deutschland, x=prec$ts), color="blue") +
       xlab("Year") + ylab("Precipitation [mm]")
 mp
 ```
 
 ![](README_files/figure-html/plot-1.png)<!-- -->
-
-
-
-
