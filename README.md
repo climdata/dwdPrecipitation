@@ -96,6 +96,10 @@ require("ggplot2")
 ## Loading required package: ggplot2
 ```
 
+```
+## Warning: package 'ggplot2' was built under R version 3.5.3
+```
+
 ```r
 mp <- ggplot() +
       geom_line(aes(y=prec$Deutschland, x=prec$ts), color="blue") +
