@@ -31,10 +31,16 @@ jobs:
         run: (pwd)
       - name: Info2 ls
         run: ls -l -a
+      - name: Info3 ls
+        run: ls -l -a ${{ github.workspace }}
       - name: Install docker-compose
         run: (apt-get -y --no-install-recommends install docker-compose)   
       - name: Run the compose file
-        run: docker-compose --file dc-rstat.yml up -d
+        run: docker-compose --file ${{ github.workspace }}/dc-rstat.yml up -d
+      - name: Info1c pwd
+        run: docker exec rstat pwd
+      - name: Info2c ls
+        run: docker exec rstat ls -l -a
       - name: Install pandoc
         run: (docker exec rstat apt-get -y --no-install-recommends install pandoc)
       - name: Install markdown
