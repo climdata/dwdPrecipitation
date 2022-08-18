@@ -17,6 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: tamboraorg/crecoding:2020.0
+      container_name: rstat
       env:
         NODE_ENV: development
       ports:
@@ -56,6 +57,10 @@ jobs:
         run: (apt-get -y --no-install-recommends install pandoc) 
       - name: Install markdown
         run: (R -e "install.packages('rmarkdown')")
+
+      - name: Info1d pwd
+        run: docker exec rstat pwd
+
       - name: Run knitr
 #        run: (R -e "rmarkdown::render('/cre/R/README.Rmd')")
         run: (R -e "rmarkdown::render('${{ github.workspace }}/README.Rmd')")
