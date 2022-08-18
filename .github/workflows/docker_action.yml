@@ -31,8 +31,8 @@ jobs:
         run: (pwd)
       - name: Info2 ls
         run: ls -l -a
-      - name: Info3 ls
-        run: ls -l -a ${{ github.workspace }}
+#      - name: Info3 ls
+#        run: ls -l -a ${{ github.workspace }}
       - name: Install docker-compose
         run: (apt-get -y --no-install-recommends install docker-compose)   
       - name: Run the compose file
