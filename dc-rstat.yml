@@ -1,0 +1,30 @@
+version: '2'
+services:
+
+  cre-glue:
+    image: tamboraorg/creglue:2020.0
+    container_name: glue
+    volumes:
+     - /var/run/docker.sock:/tmp/docker.sock:ro
+     - ./secrets:/cre/secrets
+
+  cre-r:
+   image: tamboraorg/crecoding:2020.0
+   container_name: rstat
+   environment:
+     TESSERACT_LANGUAGES: deu,frk
+   volumes:
+      - "./:/cre/R"
+   volumes_from:
+    - cre-glue
+ 
+# sudo  docker system prune -f
+# /etc/init.d/apache2 stop
+# sudo docker exec crepython pip install -r /cre/python/requirements.txt
+# sudo /home/kmicha/anaconda3/bin/docker-compose --file dc-rstat.yml up -d
+# sudo  docker-compose --file dc-rstat.yml up -d
+# sudo docker exec img /cre/scripts/all.sh
+# sudo chmod 777 -R ./volumes/data
+# R -e "install.packages('rmarkdown')"
+# R -e "rmarkdown::render('/cre/R/README.Rmd')"
+
