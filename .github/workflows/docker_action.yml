@@ -26,7 +26,7 @@ jobs:
         - ${{ github.workspace }}:/cre/R
     steps:
       - name: Install pandoc
-        run: | pwd
+        run: pwd
 #        run: (apt-get -y --no-install-recommends install pandoc) 
 #      - name: Install markdown
 #        run: (R -e "install.packages('rmarkdown')")
