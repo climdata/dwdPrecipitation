@@ -57,7 +57,7 @@ jobs:
       - name: Install markdown
         run: (R -e "install.packages('rmarkdown')")
       - name: Run knitr
-        run: (R -e "rmarkdown::render('/cre/R/README.Rmd')")
+#        run: (R -e "rmarkdown::render('/cre/R/README.Rmd')")
         run: (R -e "rmarkdown::render('${{ github.workspace }}/README.Rmd')")
       - name: Submit changes       
         uses: EndBug/add-and-commit@v9
