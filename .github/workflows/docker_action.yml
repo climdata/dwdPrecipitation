@@ -39,8 +39,8 @@ jobs:
 #        run: (apt-get -y --no-install-recommends install docker-compose)   
 #      - name: Run the compose file
 #        run: docker-compose --file dc-rstat.yml up -d
-      - name: Check running containers
-        run: docker ps -a
+###      - name: Check running containers
+###        run: docker ps -a
 ##      - name: Info1c pwd
 ##        run: docker exec rstat pwd
 ##      - name: Info2c ls
