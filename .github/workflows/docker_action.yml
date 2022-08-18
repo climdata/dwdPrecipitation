@@ -25,10 +25,11 @@ jobs:
         - ./:/cre/R
     steps:
       - name: Install pandoc
-        run: (apt-get -y --no-install-recommends install pandoc) 
-      - name: Install markdown
-        run: (R -e "install.packages('rmarkdown')")
-      - name: Run knitr
-        run: (R -e "rmarkdown::render('/cre/R/README.Rmd')")
-      - name: Submit changes       
-        uses: EndBug/add-and-commit@v9
+        run: pwd
+#        run: (apt-get -y --no-install-recommends install pandoc) 
+#      - name: Install markdown
+#        run: (R -e "install.packages('rmarkdown')")
+#      - name: Run knitr
+#        run: (R -e "rmarkdown::render('/cre/R/README.Rmd')")
+#      - name: Submit changes       
+#        uses: EndBug/add-and-commit@v9
