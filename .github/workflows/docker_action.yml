@@ -22,7 +22,7 @@ jobs:
       ports:
         - 80
       volumes:
-        - ./:/cre/R
+        - .:/cre/R
     steps:
       - name: Install pandoc
         run: pwd
