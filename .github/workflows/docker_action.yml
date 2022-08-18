@@ -25,11 +25,14 @@ jobs:
 #        - ./.:/cre/R
         - ${{ github.workspace }}:/cre/R
     steps:
-      - uses: actions/checkout@v2
-      - name: Info1 pwd
+      - name: Info1a pwd
         run: pwd
+      - name: Info1b pwd
+        run: (pwd)
       - name: Info2 ls
         run: ls -l -a
+      - name: Install docker-compose
+        run: (apt-get -y --no-install-recommends install docker-compose)   
       - name: Run the compose file
         run: docker-compose --file dc-rstat.yml up -d
       - name: Install pandoc
