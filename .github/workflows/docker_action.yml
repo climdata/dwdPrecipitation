@@ -22,7 +22,8 @@ jobs:
       ports:
         - 80
       volumes:
-        - ./.:/cre/R
+#        - ./.:/cre/R
+        - ${{ github.workspace }}:/cre/R
     steps:
       - name: Install pandoc
         run: | pwd
