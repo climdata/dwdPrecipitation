@@ -35,6 +35,9 @@ jobs:
         run: (pwd)
       - name: Info2 ls
         run: ls -l -a
+      - name: Info3 ls
+        run: ls -l -a /cre/R
+
 #      - name: Info3 ls
 #        run: ls -l -a ${{ github.workspace }}
 
