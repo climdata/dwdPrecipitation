@@ -25,6 +25,7 @@ jobs:
 #        - ./.:/cre/R
         - ${{ github.workspace }}:/cre/R
     steps:
+      - uses: actions/checkout@v2
       - name: Info1 pwd
         run: pwd
       - name: Info2 ls
