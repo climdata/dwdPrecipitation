@@ -8,8 +8,8 @@ on:
       - 'master'
   workflow_dispatch:
   schedule:
-    # * is a special character in YAML so you have to quote this string 5:00
-    - cron:  '00 5 * * *'
+    # * is a special character in YAML so you have to quote this string : weekly,Sunday,10:00 #m h d/m m d/w 
+    - cron:  '00 10 * * 0'
 
 
 jobs:
@@ -67,8 +67,7 @@ jobs:
 ##        run: docker exec rstat pwd
 
       - name: Run knitr
-#        run: (R -e "rmarkdown::render('/cre/R/README.Rmd')")
-#        run: (R -e "rmarkdown::render('${{ github.workspace }}/README.Rmd')")
-        run: (R -e "rmarkdown::render('README.Rmd')")
+        run: (R -e "rmarkdown::render('/cre/R/README.Rmd')")
+#        run: (R -e "rmarkdown::render('README.Rmd')")
       - name: Submit changes       
         uses: EndBug/add-and-commit@v9
